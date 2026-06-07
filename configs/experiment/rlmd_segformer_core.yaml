@@ -1,0 +1,18 @@
+# REAL PRIMARY benchmark: segformer+core on RLMD (2137 real road-marking images, 25 classes).
+# fp32 (GTX-1650 fp16 diverges), 384^2, pretrained ImageNet encoder.
+_base_:
+  - ../dataset/rlmd.yaml
+  - ../model/segformer.yaml
+  - ../loss/core.yaml
+  - ../train/gpu.yaml
+run_name: rlmd_segformer_core
+seed: 42
+model: {pretrained: true}
+dataset: {image_size: [384, 384]}
+train:
+  epochs: 18
+  batch_size: 8
+  amp: false
+  num_workers: 6
+  optimizer: {name: adamw, lr: 0.0004, weight_decay: 0.0001}
+notes: "RLMD real road markings: segformer+core (fp32, 384, pretrained)"

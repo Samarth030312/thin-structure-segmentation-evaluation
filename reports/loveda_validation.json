@@ -1,0 +1,47 @@
+{
+  "root": "datasets/loveda",
+  "num_classes": 8,
+  "passed": true,
+  "total_errors": 0,
+  "total_warnings": 0,
+  "splits": [
+    {
+      "split": "train",
+      "n_images": 136,
+      "n_masks": 136,
+      "n_paired": 136,
+      "n_errors": 0,
+      "n_warnings": 0,
+      "class_pixel_counts": {
+        "1": 6198123,
+        "2": 632590,
+        "3": 289363,
+        "4": 1748323,
+        "7": 6804199,
+        "6": 3288870,
+        "5": 785974,
+        "0": 306574
+      },
+      "issues": []
+    },
+    {
+      "split": "test",
+      "n_images": 41,
+      "n_masks": 41,
+      "n_paired": 41,
+      "n_errors": 0,
+      "n_warnings": 0,
+      "class_pixel_counts": {
+        "1": 1153203,
+        "4": 633603,
+        "5": 346239,
+        "6": 1525991,
+        "0": 156831,
+        "2": 90633,
+        "3": 102611,
+        "7": 2036585
+      },
+      "issues": []
+    }
+  ]
+}

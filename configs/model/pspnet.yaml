@@ -1,0 +1,4 @@
+model:
+  name: pspnet
+  encoder: resnet34
+  pretrained: true

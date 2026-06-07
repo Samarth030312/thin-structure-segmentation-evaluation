@@ -1,0 +1,16 @@
+_base_:
+  - ../dataset/massroads_bin.yaml
+  - ../model/unet.yaml
+  - ../loss/ce_dice.yaml
+  - ../train/gpu.yaml
+run_name: uav_massroads
+seed: 42
+model: {pretrained: true}
+train:
+  epochs: 40
+  batch_size: 4
+  grad_accum: 2
+  amp: false
+  num_workers: 6
+  optimizer: {name: adamw, lr: 0.0004, weight_decay: 0.0001}
+notes: "Massachusetts Roads binary thin road, converged"

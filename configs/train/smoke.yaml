@@ -1,0 +1,24 @@
+# Tiny, fast schedule to validate the *pipeline* on CPU with synthetic data.
+# Produces real (small-scale) numbers in well under a minute.
+train:
+  device: cpu
+  epochs: 3
+  batch_size: 4
+  val_batch_size: 4
+  num_workers: 0
+  pin_memory: false
+  amp: false
+  grad_accum: 1
+  grad_clip: 1.0
+  monitor: miou
+  patience: 5
+  out_dir: outputs
+  leaderboard: reports/leaderboard.csv
+  tensorboard: true
+  wandb: false
+  optimizer:
+    name: adamw
+    lr: 0.001
+    weight_decay: 0.0001
+  scheduler:
+    name: cosine

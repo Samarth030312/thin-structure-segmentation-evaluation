@@ -1,0 +1,26 @@
+# GPU training profile tuned for a 4 GB GTX 1650 (measured ~3 GB @ bs8/256 fp32).
+train:
+  device: auto
+  epochs: 25
+  batch_size: 8
+  val_batch_size: 8
+  num_workers: 6
+  pin_memory: true
+  # AMP off: from-scratch ResNet in fp16 overflows on the first batch, and at
+  # this model size the 4 GB card has ample fp32 headroom. Turn on with
+  # pretrained encoders if you want the speedup.
+  amp: false
+  grad_accum: 1
+  grad_clip: 1.0
+  monitor: miou
+  patience: 12
+  out_dir: outputs
+  leaderboard: reports/leaderboard.csv
+  tensorboard: true
+  wandb: false
+  optimizer:
+    name: adamw
+    lr: 0.0008
+    weight_decay: 0.0001
+  scheduler:
+    name: cosine

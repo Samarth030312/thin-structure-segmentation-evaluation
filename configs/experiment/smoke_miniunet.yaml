@@ -1,0 +1,12 @@
+# End-to-end smoke experiment: native MiniUNet on synthetic data, CPU, 3 epochs.
+# This is the one that runs anywhere (no smp / GPU / internet) and produces the
+# real numbers committed in reports/.
+_base_:
+  - ../dataset/synthetic.yaml
+  - ../model/miniunet.yaml
+  - ../loss/ce_dice.yaml
+  - ../train/smoke.yaml
+
+run_name: smoke_miniunet
+seed: 42
+notes: "synthetic-data CPU smoke run (pipeline validation, not headline science)"

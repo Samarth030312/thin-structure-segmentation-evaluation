@@ -1,0 +1,11 @@
+# Architecture sweep (mis-ranking claim): segformer on synthetic_lg, fixed loss/schedule.
+_base_:
+  - ../dataset/synthetic_lg.yaml
+  - ../model/segformer.yaml
+  - ../loss/ce_dice.yaml
+  - ../train/gpu.yaml
+run_name: arch_segformer
+seed: 42
+model:
+  pretrained: false
+notes: "architecture sweep: segformer (ce_dice)"

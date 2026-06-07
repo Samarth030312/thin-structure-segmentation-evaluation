@@ -1,0 +1,24 @@
+# Template for bringing your own semantic-segmentation dataset.
+# Point `root` at your prepared dataset (see docs/training_guide.md for the
+# expected images/<split> + masks/<split> layout) and adjust the taxonomy.
+# `class_map` remaps raw mask values onto contiguous ids if needed.
+#
+# For ready-to-run REAL datasets used in this project, see instead:
+#   configs/dataset/uavid_bin.yaml      (UAVid, binary road)
+#   configs/dataset/massroads_bin.yaml  (Massachusetts Roads, binary thin road)
+#   configs/dataset/loveda_bin.yaml     (LoveDA, binary road)
+dataset:
+  name: custom_dataset
+  root: datasets/custom_dataset
+  num_classes: 2
+  ignore_index: 255            # common "void" id in driving datasets
+  foreground_only: true
+  image_size: [512, 512]
+  train_split: train
+  val_split: val
+  test_split: test
+  strict: true
+  class_map: null
+  class_names:
+    - background
+    - foreground

@@ -1,0 +1,7 @@
+run_name,model,loss,split,mIoU,mDice,mF1,mPrecision,mRecall,PixelAcc,FWIoU,clDice,BoundaryIoU,clF1,clRecall,TolIoU,params_M,notes
+uav_uavid_s42,unet,ce_dice,test,0.5972,0.7478,0.7478,0.8736,0.6537,0.9563,0.918,0.6017,0.4645,0.6798,0.5836,0.5756,24.44,"UAVid binary road, converged"
+uav_uavid_s123,unet,ce_dice,test,0.5584,0.7167,0.7167,0.861,0.6138,0.9519,0.9102,0.5151,0.4264,0.5738,0.5219,0.5011,24.44,"UAVid binary road, converged"
+uav_uavid_s999,unet,ce_dice,test,0.5529,0.7121,0.7121,0.7343,0.6912,0.9446,0.9022,0.5846,0.3995,0.647,0.5883,0.5503,24.44,"UAVid binary road, converged"
+uav_massroads_s123,unet,ce_dice,test,0.509,0.6746,0.6746,0.75,0.613,0.9693,0.9444,0.7672,0.5129,0.8157,0.7593,0.6071,24.44,"Massachusetts Roads binary thin road, converged"
+uav_massroads_s42,unet,ce_dice,test,0.4853,0.6534,0.6534,0.7328,0.5896,0.9675,0.9415,0.7416,0.4904,0.7836,0.723,0.5765,24.44,"Massachusetts Roads binary thin road, converged"
+uav_massroads_s999,unet,ce_dice,test,0.4821,0.6506,0.6506,0.6982,0.609,0.966,0.9398,0.7625,0.4988,0.8096,0.77,0.5928,24.44,"Massachusetts Roads binary thin road, converged"

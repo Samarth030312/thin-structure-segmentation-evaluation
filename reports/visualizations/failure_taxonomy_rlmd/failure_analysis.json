@@ -1,0 +1,362 @@
+{
+  "n_eval": 276,
+  "n_worst": 50,
+  "mean_score_all": 0.21168484060773432,
+  "mean_score_worst": 0.05040932451684657,
+  "failure_mode_counts": {
+    "shadow_lowcontrast": 22,
+    "thin_marking": 28
+  },
+  "worst": [
+    {
+      "stem": "25410",
+      "iou": 0.03712163593403775,
+      "clDice": 0.0,
+      "score": 0.018560817967018875,
+      "category": "shadow_lowcontrast"
+    },
+    {
+      "stem": "49700",
+      "iou": 0.03859673394094605,
+      "clDice": 0.0,
+      "score": 0.019298366970473026,
+      "category": "shadow_lowcontrast"
+    },
+    {
+      "stem": "44100",
+      "iou": 0.0397292715015939,
+      "clDice": 0.0,
+      "score": 0.01986463575079695,
+      "category": "shadow_lowcontrast"
+    },
+    {
+      "stem": "45770",
+      "iou": 0.03973442925344527,
+      "clDice": 0.0,
+      "score": 0.019867214626722637,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "21840",
+      "iou": 0.03978162977427858,
+      "clDice": 0.0,
+      "score": 0.01989081488713929,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "7370",
+      "iou": 0.03982340494788966,
+      "clDice": 0.0,
+      "score": 0.01991170247394483,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "25510",
+      "iou": 0.039834255642334095,
+      "clDice": 0.0,
+      "score": 0.019917127821167047,
+      "category": "shadow_lowcontrast"
+    },
+    {
+      "stem": "21730",
+      "iou": 0.039848361545111864,
+      "clDice": 0.0,
+      "score": 0.019924180772555932,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "21070",
+      "iou": 0.03987250434025073,
+      "clDice": 0.0,
+      "score": 0.019936252170125367,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "21330",
+      "iou": 0.039915635850667375,
+      "clDice": 0.0,
+      "score": 0.019957817925333687,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "21270",
+      "iou": 0.039945203993028464,
+      "clDice": 0.0,
+      "score": 0.019972601996514232,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "13930",
+      "iou": 0.03997043185761178,
+      "clDice": 0.0,
+      "score": 0.01998521592880589,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "47560",
+      "iou": 0.039993760850667325,
+      "clDice": 0.0,
+      "score": 0.019996880425333662,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "500",
+      "iou": 0.03970131843087753,
+      "clDice": 0.003455722938447354,
+      "score": 0.02157852068466244,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "50270",
+      "iou": 0.039644366077759556,
+      "clDice": 0.0055710181609670605,
+      "score": 0.02260769211936331,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "5270",
+      "iou": 0.03801614106474194,
+      "clDice": 0.008500990429539166,
+      "score": 0.023258565747140553,
+      "category": "shadow_lowcontrast"
+    },
+    {
+      "stem": "12680",
+      "iou": 0.04023423369829495,
+      "clDice": 0.008230448639832147,
+      "score": 0.02423234116906355,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "2400",
+      "iou": 0.0396910118074455,
+      "clDice": 0.012053027952160223,
+      "score": 0.02587201987980286,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "2570",
+      "iou": 0.0398429212842746,
+      "clDice": 0.013245031787202434,
+      "score": 0.026543976535738516,
+      "category": "shadow_lowcontrast"
+    },
+    {
+      "stem": "21770",
+      "iou": 0.03936547552032271,
+      "clDice": 0.015432090491521512,
+      "score": 0.027398783005922113,
+      "category": "shadow_lowcontrast"
+    },
+    {
+      "stem": "22560",
+      "iou": 0.03957760520869505,
+      "clDice": 0.026460834625727292,
+      "score": 0.03301921991721117,
+      "category": "shadow_lowcontrast"
+    },
+    {
+      "stem": "22240",
+      "iou": 0.03915581816575708,
+      "clDice": 0.02977973777722191,
+      "score": 0.03446777797148949,
+      "category": "shadow_lowcontrast"
+    },
+    {
+      "stem": "50170",
+      "iou": 0.03950000678230117,
+      "clDice": 0.030456803241596705,
+      "score": 0.03497840501194894,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "21620",
+      "iou": 0.0398388584449841,
+      "clDice": 0.030959749256359137,
+      "score": 0.03539930385067162,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "45160",
+      "iou": 0.03792207087423487,
+      "clDice": 0.032976561927246295,
+      "score": 0.03544931640074058,
+      "category": "shadow_lowcontrast"
+    },
+    {
+      "stem": "20890",
+      "iou": 0.03995496748025422,
+      "clDice": 0.03493449346885116,
+      "score": 0.03744473047455269,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "46190",
+      "iou": 0.039035646539682334,
+      "clDice": 0.035863975713852775,
+      "score": 0.037449811126767554,
+      "category": "shadow_lowcontrast"
+    },
+    {
+      "stem": "50250",
+      "iou": 0.03875051615568023,
+      "clDice": 0.046544115927903515,
+      "score": 0.04264731604179187,
+      "category": "shadow_lowcontrast"
+    },
+    {
+      "stem": "46100",
+      "iou": 0.03661089742716025,
+      "clDice": 0.0567220504941087,
+      "score": 0.046666473960634475,
+      "category": "shadow_lowcontrast"
+    },
+    {
+      "stem": "1080",
+      "iou": 0.04157805818411048,
+      "clDice": 0.06453594005605132,
+      "score": 0.0530569991200809,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "3500",
+      "iou": 0.042544373309165655,
+      "clDice": 0.084550322439849,
+      "score": 0.06354734787450733,
+      "category": "shadow_lowcontrast"
+    },
+    {
+      "stem": "5170",
+      "iou": 0.0428207948587057,
+      "clDice": 0.0845670870432889,
+      "score": 0.0636939409509973,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "46170",
+      "iou": 0.03852182310294838,
+      "clDice": 0.09199317689334235,
+      "score": 0.06525749999814537,
+      "category": "shadow_lowcontrast"
+    },
+    {
+      "stem": "770",
+      "iou": 0.03984670275254036,
+      "clDice": 0.09180326988263449,
+      "score": 0.06582498631758743,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "30360",
+      "iou": 0.040992275081016896,
+      "clDice": 0.09364547596503474,
+      "score": 0.06731887552302582,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "13470",
+      "iou": 0.039743313186376236,
+      "clDice": 0.09723385431152498,
+      "score": 0.06848858374895062,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "49000",
+      "iou": 0.03960615869006399,
+      "clDice": 0.10451976407601675,
+      "score": 0.07206296138304037,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "6835",
+      "iou": 0.040102111349849895,
+      "clDice": 0.11241066179012092,
+      "score": 0.0762563865699854,
+      "category": "shadow_lowcontrast"
+    },
+    {
+      "stem": "21470",
+      "iou": 0.039676478171749054,
+      "clDice": 0.1193975487483975,
+      "score": 0.07953701346007327,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "170",
+      "iou": 0.03981031096287709,
+      "clDice": 0.13477428999646732,
+      "score": 0.08729230047967221,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "60",
+      "iou": 0.04121870261910522,
+      "clDice": 0.13343261727222816,
+      "score": 0.08732565994566668,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "49630",
+      "iou": 0.039570605500571,
+      "clDice": 0.13880645967023478,
+      "score": 0.0891885325854029,
+      "category": "shadow_lowcontrast"
+    },
+    {
+      "stem": "16315",
+      "iou": 0.04231184589343147,
+      "clDice": 0.14716446836151068,
+      "score": 0.09473815712747108,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "5505",
+      "iou": 0.050066739090770813,
+      "clDice": 0.1461317913195749,
+      "score": 0.09809926520517286,
+      "category": "shadow_lowcontrast"
+    },
+    {
+      "stem": "49050",
+      "iou": 0.03963102486303282,
+      "clDice": 0.15670735086085372,
+      "score": 0.09816918786194327,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "55",
+      "iou": 0.04280265505131725,
+      "clDice": 0.15426855571560086,
+      "score": 0.09853560538345905,
+      "category": "shadow_lowcontrast"
+    },
+    {
+      "stem": "6260",
+      "iou": 0.043560266547926274,
+      "clDice": 0.16387958163562386,
+      "score": 0.10371992409177506,
+      "category": "thin_marking"
+    },
+    {
+      "stem": "3460",
+      "iou": 0.04167962153113427,
+      "clDice": 0.16955433842222165,
+      "score": 0.10561697997667796,
+      "category": "shadow_lowcontrast"
+    },
+    {
+      "stem": "22070",
+      "iou": 0.0395778328299185,
+      "clDice": 0.17282769002597922,
+      "score": 0.10620276142794886,
+      "category": "shadow_lowcontrast"
+    },
+    {
+      "stem": "2980",
+      "iou": 0.055475067661301794,
+      "clDice": 0.1653956787333226,
+      "score": 0.1104353731973122,
+      "category": "shadow_lowcontrast"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+model:
+  name: unetpp
+  encoder: resnet34
+  pretrained: true

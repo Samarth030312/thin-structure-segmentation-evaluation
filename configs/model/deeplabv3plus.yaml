@@ -1,0 +1,4 @@
+model:
+  name: deeplabv3plus
+  encoder: resnet50
+  pretrained: true

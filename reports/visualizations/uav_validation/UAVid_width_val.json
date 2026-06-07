@@ -1,0 +1,38 @@
+{
+  "label": "UAVid",
+  "n_images": 24,
+  "measured_mean_width_px": 16.239,
+  "measured_median_width_px": 14.068,
+  "measured_mean_mIoU": 0.528,
+  "measured_mean_clDice": 0.543,
+  "measured_mean_gap": 0.015,
+  "bins": {
+    "6-12": {
+      "n": 1,
+      "mIoU": 0.078,
+      "clDice": 0.171,
+      "tol_recall": 0.127
+    },
+    "12-20": {
+      "n": 17,
+      "mIoU": 0.654,
+      "clDice": 0.675,
+      "tol_recall": 0.667
+    },
+    "20-35": {
+      "n": 6,
+      "mIoU": 0.247,
+      "clDice": 0.231,
+      "tol_recall": 0.205
+    }
+  },
+  "corr_width_iou": -0.44,
+  "corr_width_cldice": -0.446,
+  "thin_tertile": {
+    "n": 8,
+    "mean_IoU": 0.538,
+    "mean_clDice": 0.545,
+    "mean_recall": 0.531,
+    "clDice_minus_IoU": 0.007
+  }
+}

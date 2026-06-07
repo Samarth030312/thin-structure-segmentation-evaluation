@@ -1,0 +1,15 @@
+# Massachusetts Roads (HF asolodin/massachusetts_roads_dataset_500) as binary road.
+# Aerial imagery, THIN rural roads (~3.6% pixels) -- real aerial thin-structure test.
+dataset:
+  name: massroads_bin
+  root: datasets/massroads
+  num_classes: 2
+  ignore_index: 255
+  foreground_only: true
+  image_size: [512, 512]
+  train_split: train
+  val_split: test
+  test_split: test
+  strict: true
+  class_map: null
+  class_names: [background, road]

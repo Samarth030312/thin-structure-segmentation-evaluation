@@ -1,0 +1,19 @@
+# CLEAN loss ablation on RLMD: U-Net++ fixed, loss varied (vs rlmd_unetpp_core).
+# IDENTICAL to rlmd_unetpp_core except the loss -> isolates the loss effect.
+_base_:
+  - ../dataset/rlmd.yaml
+  - ../model/unetpp.yaml
+  - ../loss/tversky.yaml
+  - ../train/gpu.yaml
+run_name: rlmd_unetpp_tversky
+seed: 42
+model: {pretrained: true}
+dataset: {image_size: [384, 384], subsample: 500}
+train:
+  epochs: 12
+  batch_size: 4
+  grad_accum: 2
+  amp: false
+  num_workers: 6
+  optimizer: {name: adamw, lr: 0.0004, weight_decay: 0.0001}
+notes: "RLMD clean loss ablation: unetpp+tversky (fp32 384 pretrained, 500-img subset)"

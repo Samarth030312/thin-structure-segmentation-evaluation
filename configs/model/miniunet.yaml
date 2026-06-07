@@ -1,0 +1,6 @@
+# Native fallback U-Net (no smp / internet needed). Used for CI + smoke tests.
+model:
+  name: miniunet
+  base: 32
+  depth: 4
+  pretrained: false

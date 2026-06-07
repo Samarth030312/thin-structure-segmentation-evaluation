@@ -1,0 +1,13 @@
+# Real smp segformer on synthetic data (CPU, short) — populates the leaderboard with
+# a genuine architecture comparison alongside the MiniUNet fallback.
+_base_:
+  - ../dataset/synthetic.yaml
+  - ../model/segformer.yaml
+  - ../loss/ce_dice.yaml
+  - ../train/smoke.yaml
+
+run_name: synthetic_segformer
+seed: 42
+model:
+  pretrained: false          # avoid weight download; pipeline validation only
+notes: "real smp segformer on synthetic data (CPU pipeline validation)"

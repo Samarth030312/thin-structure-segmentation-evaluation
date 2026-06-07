@@ -1,0 +1,20 @@
+run_name,model,loss,split,mIoU,mDice,mF1,mPrecision,mRecall,PixelAcc,FWIoU,clDice,BoundaryIoU,clF1,clRecall,TolIoU,params_M,notes
+abl_unet_core,unet,core,test,0.9453,0.9716,0.9716,0.9791,0.9646,0.9987,0.9974,0.9993,0.9859,1.0,1.0,0.9948,24.44,loss ablation: core
+abl_unet_ce_dice,unet,ce_dice,test,0.9378,0.9675,0.9675,0.9744,0.9613,0.9985,0.9971,0.9979,0.9857,1.0,1.0,0.9941,24.44,loss ablation: ce_dice
+arch_unetpp,unetpp,ce_dice,test,0.9327,0.9645,0.9645,0.9718,0.9584,0.9986,0.9972,0.9993,0.9869,1.0,1.0,0.995,26.08,architecture sweep: unetpp (ce_dice)
+arch_deeplabv3plus,deeplabv3plus,ce_dice,test,0.8782,0.9348,0.9348,0.9305,0.9396,0.9945,0.9894,0.9946,0.8981,1.0,0.9999,0.9462,26.68,architecture sweep: deeplabv3plus (ce_dice)
+arch_segformer,segformer,ce_dice,test,0.8471,0.9154,0.9154,0.9217,0.91,0.9948,0.9901,0.9965,0.9181,0.9997,0.9994,0.9589,3.72,architecture sweep: segformer (ce_dice)
+abl_unet_tversky,unet,tversky,test,0.7874,0.8101,0.8101,0.7992,0.9571,0.5123,0.5093,0.2194,0.0546,0.4266,1.0,0.209,24.44,loss ablation: tversky
+arch_pspnet,pspnet,ce_dice,test,0.6345,0.7747,0.7747,0.7392,0.8203,0.9768,0.9601,0.9187,0.6199,0.9916,0.9952,0.7857,21.47,architecture sweep: pspnet (ce_dice)
+rlmd_unetpp_tversky,unetpp,tversky,test,0.144,0.2079,0.2079,0.189,0.2579,0.0091,0.0058,0.0836,0.0733,0.2277,1.0,0.0437,26.08,"RLMD clean loss ablation: unetpp+tversky (fp32 384 pretrained, 500-img subset)"
+rlmd_unetpp_dice,unetpp,dice,test,0.1399,0.1997,0.1997,0.2062,0.2252,0.0083,0.0062,0.0617,0.0591,0.1717,1.0,0.0437,26.08,RLMD converged 6-loss ablation: unetpp+dice (seed 42)
+rlmd_unet_tversky,unet,tversky,test,0.09,0.1366,0.1366,0.1167,0.2094,0.0078,0.0044,0.0778,0.0415,0.1968,1.0,0.0437,24.44,RLMD clean 6-loss ablation: unet+tversky (seed 42)
+rlmd_unet_dice,unet,dice,test,0.0811,0.124,0.124,0.1162,0.1783,0.0075,0.0046,0.0255,0.0005,0.07,1.0,0.0437,24.44,RLMD clean 6-loss ablation: unet+dice (seed 42)
+abl_unet_cldice,unet,cldice,test,0.0323,0.0546,0.0546,0.0395,0.1613,0.1109,0.1026,0.45,0.2911,0.4908,0.9999,0.1019,24.44,loss ablation: cldice
+rlmd_unetpp_ce_dice,unetpp,ce_dice,test,0.0286,0.0425,0.0425,0.118,0.0458,0.9833,0.9692,0.3728,0.2413,0.4887,0.3559,0.3244,26.08,"RLMD clean loss ablation: unetpp+ce_dice (fp32 384 pretrained, 500-img subset)"
+rlmd_unetpp_focal,unetpp,focal,test,0.0184,0.0287,0.0287,0.1212,0.023,0.9828,0.9668,0.0854,0.0516,0.163,0.1034,0.0924,26.08,RLMD converged 6-loss ablation: unetpp+focal (seed 42)
+rlmd_unetpp_ce,unetpp,ce,test,0.0095,0.0156,0.0156,0.0229,0.0121,0.982,0.9654,0.0625,0.04,0.1591,0.0955,0.0843,26.08,RLMD converged 6-loss ablation: unetpp+ce (seed 42)
+rlmd_unetpp_core,unetpp,core,test,0.0052,0.0093,0.0093,0.0072,0.0133,0.9805,0.9647,0.2751,0.1926,0.3214,0.2106,0.2151,26.08,"RLMD real road markings: unetpp+core (fp32 384 pretrained, 500-img subset)"
+rlmd_unet_ce,unet,ce,test,0.0001,0.0002,0.0002,0.0004,0.0001,0.9812,0.9628,0.0001,0.0001,0.0019,0.0011,0.0008,24.44,RLMD clean 6-loss ablation: unet+ce (seed 42)
+rlmd_unet_ce_dice,unet,ce_dice,test,0.0,0.0,0.0,0.0,0.0005,0.9803,0.962,0.0037,0.0031,0.0141,0.0088,0.0105,24.44,RLMD clean 6-loss ablation: unet+ce_dice (seed 42)
+rlmd_unet_focal,unet,focal,test,0.0,0.0,0.0,0.0003,0.0001,0.98,0.9616,0.0009,0.0006,0.0075,0.0052,0.0047,24.44,RLMD clean 6-loss ablation: unet+focal (seed 42)

@@ -1,0 +1,181 @@
+% IEEE-styled paper. Uses the standard `article` class in two columns to remain
+% portable; for a real submission, swap to \documentclass[conference]{IEEEtran}.
+\documentclass[10pt,twocolumn]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{times}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+\setlength{\parindent}{1em}
+\title{\textbf{When mIoU Lies: Topology-Aware Evaluation of Thin Road-Marking Segmentation}}
+\author{Anonymous Submission}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Mean Intersection-over-Union (mIoU) is the de-facto metric for semantic
+segmentation, including road-marking perception. We show two ways it fails for
+\emph{thin} (2--8\,px) road markings. First, on \textbf{converged} models in a
+width-controlled study (3 seeds, 95\% CIs), mIoU under-reports correctly and
+continuously detected thin markings: at 2\,px, mIoU $=0.35\pm0.01$ while
+centerline-Dice $=0.997\pm0.001$ and tolerance-IoU $=0.98$---a $\sim$0.65 gap with
+non-overlapping confidence intervals. Second, under extreme multi-class imbalance
+(real RLMD, 25 classes, 609:1), mIoU---in \emph{both} its all-class and foreground
+forms---\emph{mis-ranks} losses: its top-ranked model is a frame-flooder (0.9\%
+pixel accuracy) and it places the genuine best detector third. Frequency-weighted
+IoU and pixel accuracy avoid rewarding flooding but are insensitive to foreground
+quality (spread $\le 0.005$ vs.\ centerline-Dice's 0.31); only the topology metric
+is both flood-robust and sensitive. We propose a thin-structure evaluation protocol
+and an automated three-test check, and recommend reporting it alongside mIoU. A
+studied connectivity loss yields no reliable multi-seed gain and is supplementary.
+Results are on ground-view markings and a controlled synthetic benchmark; aerial
+and full-scale validation are future work.
+\end{abstract}
+
+\section{Introduction}
+Road-marking segmentation underpins lane perception, HD-map maintenance, and
+infrastructure auditing. Markings are thin and sparse: in our real dataset they
+occupy under 2\% of pixels, with a 609:1 imbalance between the most- and
+least-common classes. The field reports mIoU almost universally. We ask whether
+mIoU faithfully reflects thin-marking quality and selects the right model and
+loss. It does not. Our contributions are: (1) a thin-structure evaluation protocol
+(clDice, Boundary-IoU, tolerance-IoU, width-stratified analysis); (2) empirical
+evidence that mIoU mis-ranks losses on real markings, crowning a model that floods
+99\% of pixels, with the mechanism measured directly via pixel accuracy; (3) an
+honest multi-seed study of a connectivity loss that yields no reliable gain; and
+(4) a reproducible benchmark with a deployment path. This is an \emph{evaluation}
+paper: we claim no new state of the art and report a loss that does not help.
+
+\section{Related Work}
+U-Net, U-Net++, DeepLabV3+, PSPNet, and SegFormer span the architecture space.
+clDice with its differentiable soft-skeleton, and Boundary-IoU, were proposed for
+tubular structures and boundary quality; we adopt them and add a width-stratified
+view. Dice, Focal, and Tversky address imbalance; that overlap/accuracy metrics
+reward over-prediction is known. Our contribution is the quantified rank-inversion
+on real road markings, not the observation that imbalance is hard.
+
+\section{Methodology}
+\textbf{Protocol.} For binary any-marking masks we report clDice (harmonic mean of
+skeleton precision/sensitivity), Boundary-IoU (IoU on a $d$-px boundary band),
+tolerance-IoU (detection within $\tau$ px of the GT centerline), and a
+width-stratified IoU/clDice where GT marking width is an independent variable.
+\textbf{Loss.} We study $\mathcal{L}=w_{ce}\mathrm{CE}+w_r\mathrm{Dice}+
+w_t(1-\text{soft-clDice})$. \textbf{Data.} RLMD (2{,}137 real images, 25 marking
+classes) is the real benchmark; a controlled synthetic generator provides
+ground-truth width control.
+
+\section{Experimental Setup}
+Single 4\,GB GPU; PyTorch; fp32. U-Net++ (ResNet-34) for the loss ablation.
+ImageNet-pretrained encoders, AdamW, cosine. Compute-bounded: RLMD runs use a
+500-image subset, 12 epochs, $384^2$. Statistics: per-image bootstrap 95\% CIs,
+paired bootstrap tests, seeds 42/123/999. We disclose that the real 25-class
+models are under-trained (best clDice 0.37).
+
+\section{Results}
+\subsection{mIoU under-reports thin markings (converged, multi-seed)}
+On converged models (clDice $\approx0.997$ at the training width), three seeds,
+evaluated across the controlled width series (Table~\ref{tab:width}; mean $\pm$
+95\% CI): at 2\,px mIoU $=0.35\pm0.01$ while clDice $=0.997\pm0.001$ and
+tolerance-IoU $=0.98$. The lines are correctly and continuously detected; the
+$\sim$0.65 gap has non-overlapping, tight CIs and is \emph{not} an under-training
+artifact. This is the paper's primary, hardest-to-attack result.
+
+\begin{table}[t]\centering\small
+\caption{Width study, converged models, mean $\pm$ 95\% CI over 3 seeds. mIoU
+collapses on thin markings; topology/tolerance metrics do not.}
+\label{tab:width}
+\begin{tabular}{cccc}\toprule
+width & mIoU & TolIoU & clDice \\\midrule
+2\,px & $0.35\pm0.01$ & $0.98\pm0.01$ & $0.997\pm0.001$ \\
+4\,px & $0.89\pm0.05$ & $1.00\pm0.00$ & $0.998\pm0.002$ \\
+8\,px & $0.47\pm0.06$ & $0.97\pm0.01$ & $0.95\pm0.05$ \\\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{mIoU mis-ranks losses (real RLMD)}
+Table~\ref{tab:loss} gives the same-architecture loss ablation. We test every
+common metric (Table~\ref{tab:tests}): does its top model flood the frame; does it
+rank the genuine best detector first; is it foreground-sensitive? mIoU---in both
+its all-class and foreground forms---ranks a frame-flooder first and the best
+detector third; FWIoU and pixel accuracy avoid flooding but are insensitive
+(spread $\le0.005$ vs.\ clDice's 0.31); only clDice passes all three. We scope this
+as a multi-class extreme-imbalance phenomenon, complementing Sec.~V-A.
+
+\begin{table}[t]\centering\small
+\caption{RLMD loss ablation (U-Net++, same architecture). Tversky/Dice top mIoU
+but flood the frame (PixelAcc $\approx 0.008$).}
+\label{tab:loss}
+\begin{tabular}{lccccc}\toprule
+Loss & mIoU & PixAcc & clDice & clPrec & clRec \\\midrule
+CE+Dice & 0.029 & 0.983 & \textbf{0.373} & 0.907 & 0.356 \\
+CoRe & 0.005 & 0.981 & 0.275 & 0.896 & 0.211 \\
+Focal & 0.018 & 0.983 & 0.085 & -- & 0.103 \\
+CE & 0.010 & 0.982 & 0.063 & -- & 0.096 \\
+Dice & 0.140 & 0.008 & 0.062 & -- & 1.000 \\
+Tversky & \textbf{0.144} & \textbf{0.009} & 0.084 & 0.133 & 1.000 \\\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]\centering\small
+\caption{Three-test metric check on RLMD (extreme imbalance). Only clDice passes
+all three.}
+\label{tab:tests}
+\begin{tabular}{lccc}\toprule
+Metric & top floods? & best \#1? & spread \\\midrule
+mIoU (fg) & yes & no (\#3) & 0.023 \\
+mIoU (all) & yes & no (\#3) & 0.023 \\
+FWIoU & no & yes & 0.005 \\
+PixelAcc & no & yes & 0.003 \\
+clDice & no & yes & \textbf{0.310} \\\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Connectivity loss: honest multi-seed result}
+At seed 42, CE+Dice beats CoRe (clDice 0.37 vs.\ 0.28, $p<0.001$). Across three
+seeds the advantage vanishes: CE+Dice $0.405\pm0.058$ vs.\ CoRe $0.406\pm0.141$
+($\Delta=-0.001$, 95\% CI $[-0.18,0.18]$; CoRe wins at seed 999). The single-seed
+result was an artifact caught only by multi-seed evaluation.
+
+\subsection{Deployment}
+ONNX Runtime is $1.47\times$ faster than eager PyTorch on CPU at bit-identical
+output (max\,$|\Delta|=9\mathrm{e}{-8}$); a C++/LibTorch engine and TensorRT path
+are released.
+
+\section{Discussion and Limitations}
+For thin road markings, report clDice/Boundary-IoU/tolerance-IoU and pixel
+accuracy, not mIoU alone: mIoU can rank a useless frame-flooding model first.
+\textbf{Limitations.} (1) RLMD is ground-view; we report no real aerial/UAV
+marking results. (2) The multi-class real models are under-trained (clDice 0.37),
+but the \emph{primary} result (Sec.~V-A) uses converged models (clDice $\approx
+0.997$, 3 seeds, non-overlapping CIs) and a converged binary-marking model on real
+RLMD plateaus at clDice 0.64 / mIoU 0.53$, so the central claim does not rest on
+under-training. (3) The real mis-ranking is scoped to multi-class extreme
+imbalance. (4) Three seeds; the cross-dataset probe is confounded; the studied loss
+gives no reliable gain.
+
+\section{Conclusion}
+mIoU is an unreliable---sometimes rank-inverting---metric for thin road-marking
+segmentation. We provide a topology-aware protocol that ranks models correctly, a
+controlled demonstration of the mechanism, an honest multi-seed loss study, and a
+reproducible benchmark. Converged real-data and aerial/UAV validation are the key
+next steps.
+
+\begin{thebibliography}{99}\small
+\bibitem{unet} O. Ronneberger et al., ``U-Net,'' MICCAI, 2015.
+\bibitem{unetpp} Z. Zhou et al., ``UNet++,'' DLMIA, 2018.
+\bibitem{deeplab} L.-C. Chen et al., ``DeepLabV3+,'' ECCV, 2018.
+\bibitem{psp} H. Zhao et al., ``PSPNet,'' CVPR, 2017.
+\bibitem{segformer} E. Xie et al., ``SegFormer,'' NeurIPS, 2021.
+\bibitem{cldice} S. Shit et al., ``clDice,'' CVPR, 2021.
+\bibitem{biou} B. Cheng et al., ``Boundary IoU,'' CVPR, 2021.
+\bibitem{dice} F. Milletari et al., ``V-Net,'' 3DV, 2016.
+\bibitem{focal} T.-Y. Lin et al., ``Focal Loss,'' ICCV, 2017.
+\bibitem{tversky} S. Salehi et al., ``Tversky loss,'' MLMI, 2017.
+\bibitem{rlmd} ``RLMD: A Dataset for Road Marking Segmentation,'' IEEE.
+\bibitem{loveda} J. Wang et al., ``LoveDA,'' NeurIPS D\&B, 2021.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,11 @@
+# Architecture sweep (mis-ranking claim): deeplabv3plus on synthetic_lg, fixed loss/schedule.
+_base_:
+  - ../dataset/synthetic_lg.yaml
+  - ../model/deeplabv3plus.yaml
+  - ../loss/ce_dice.yaml
+  - ../train/gpu.yaml
+run_name: arch_deeplabv3plus
+seed: 42
+model:
+  pretrained: false
+notes: "architecture sweep: deeplabv3plus (ce_dice)"

@@ -1,0 +1,14 @@
+# LoveDA binarized: road (class 3) -> foreground (class 1). For cross-dataset.
+dataset:
+  name: loveda_bin
+  root: datasets/loveda
+  num_classes: 2
+  ignore_index: 255
+  foreground_only: true
+  image_size: [384, 384]
+  train_split: train
+  val_split: test
+  test_split: test
+  strict: true
+  class_map: {3: 1}
+  class_names: [background, road]

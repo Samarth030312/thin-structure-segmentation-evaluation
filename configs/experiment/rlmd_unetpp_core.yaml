@@ -1,0 +1,20 @@
+# REAL PRIMARY benchmark: unetpp+core on RLMD (real road markings, 25 classes).
+# fp32 (GTX-1650 fp16 diverges), 384^2, pretrained encoder, subsampled train for
+# session-tractable runtime (full-data command identical, drop 'subsample').
+_base_:
+  - ../dataset/rlmd.yaml
+  - ../model/unetpp.yaml
+  - ../loss/core.yaml
+  - ../train/gpu.yaml
+run_name: rlmd_unetpp_core
+seed: 42
+model: {pretrained: true}
+dataset: {image_size: [384, 384], subsample: 500}
+train:
+  epochs: 12
+  batch_size: 4
+  grad_accum: 2
+  amp: false
+  num_workers: 6
+  optimizer: {name: adamw, lr: 0.0004, weight_decay: 0.0001}
+notes: "RLMD real road markings: unetpp+core (fp32 384 pretrained, 500-img subset)"

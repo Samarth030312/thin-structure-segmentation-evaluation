@@ -1,0 +1,38 @@
+{
+  "label": "LoveDA",
+  "n_images": 22,
+  "measured_mean_width_px": 4.899,
+  "measured_median_width_px": 3.559,
+  "measured_mean_mIoU": 0.478,
+  "measured_mean_clDice": 0.698,
+  "measured_mean_gap": 0.22,
+  "bins": {
+    "<6": {
+      "n": 19,
+      "mIoU": 0.462,
+      "clDice": 0.703,
+      "tol_recall": 0.71
+    },
+    "6-12": {
+      "n": 1,
+      "mIoU": 0.517,
+      "clDice": 0.657,
+      "tol_recall": 0.965
+    },
+    "12-20": {
+      "n": 2,
+      "mIoU": 0.613,
+      "clDice": 0.667,
+      "tol_recall": 0.693
+    }
+  },
+  "corr_width_iou": 0.289,
+  "corr_width_cldice": 0.035,
+  "thin_tertile": {
+    "n": 7,
+    "mean_IoU": 0.322,
+    "mean_clDice": 0.546,
+    "mean_recall": 0.539,
+    "clDice_minus_IoU": 0.224
+  }
+}

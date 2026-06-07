@@ -1,0 +1,4 @@
+loss:
+  name: ce_dice
+  w_ce: 0.5
+  w_dice: 0.5

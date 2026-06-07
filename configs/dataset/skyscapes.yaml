@@ -1,0 +1,32 @@
+# SkyScapes-Lane (DLR) — real aerial road/lane-marking benchmark.
+# 13 classes = background + 12 lane-marking categories (Azimi et al., ICCV 2019).
+# Point `root` at the PREPARED (tiled) dataset produced by
+# scripts/prepare_skyscapes.py — see docs/skyscapes.md.
+dataset:
+  name: skyscapes
+  root: datasets/skyscapes            # prepared/tiled output (folder contract)
+  num_classes: 13
+  ignore_index: 255                   # void/unlabeled pixels (if present)
+  foreground_only: true               # mean metrics over the 12 marking classes
+  image_size: [512, 512]              # tiles are already 512²; Resize is a no-op
+  train_split: train
+  val_split: val
+  test_split: test
+  strict: true
+  # Optional load-time id remap if your download's ids differ from the order
+  # below (run `python scripts/prepare_skyscapes.py inspect ...` to check).
+  class_map: null
+  class_names:
+    - background            # 0  (non-lane-marking)
+    - dash_line             # 1
+    - long_line             # 2
+    - small_dash_line       # 3
+    - turn_sign             # 4
+    - plus_sign             # 5
+    - other_signs           # 6
+    - crosswalk             # 7
+    - stop_line             # 8
+    - zebra_zone            # 9
+    - no_parking_zone       # 10
+    - parking_zone          # 11
+    - other_lane_markings   # 12

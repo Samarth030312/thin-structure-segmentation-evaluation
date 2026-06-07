@@ -1,0 +1,15 @@
+# UAVid (HF arakesh/uavid-15-hq-mixedres) ingested as BINARY road segmentation.
+# Genuine low-altitude UAV imagery (3840x2160 -> 768), road = (128,64,128).
+dataset:
+  name: uavid_bin
+  root: datasets/uavid
+  num_classes: 2
+  ignore_index: 255
+  foreground_only: true
+  image_size: [512, 512]
+  train_split: train
+  val_split: test
+  test_split: test
+  strict: true
+  class_map: null
+  class_names: [background, road]

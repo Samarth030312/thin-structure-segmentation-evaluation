@@ -1,0 +1,23 @@
+{
+  "model": "miniunet",
+  "encoder": "resnet34",
+  "size": 256,
+  "device": "cpu",
+  "backends": {
+    "pytorch": {
+      "latency_ms": 170.6,
+      "fps": 5.9
+    },
+    "onnxruntime": {
+      "latency_ms": 116.06,
+      "fps": 8.6,
+      "max_abs_diff_vs_pytorch": 8.940696716308594e-08,
+      "speedup_vs_pytorch": 1.47
+    },
+    "tensorrt": {
+      "status": "not run (TensorRT runtime not installed in this environment)",
+      "command": "trtexec --onnx=reports/deployment/miniunet.onnx --saveEngine=miniunet_fp16.engine --fp16",
+      "note": "FP16/INT8 TensorRT typically gives 2-4x over ONNX-RT on Jetson."
+    }
+  }
+}

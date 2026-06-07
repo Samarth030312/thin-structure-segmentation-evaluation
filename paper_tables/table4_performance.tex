@@ -1,0 +1,14 @@
+\begin{table}
+\caption{Performance / deployment metrics}
+\begin{tabular}{llrrrlrrrrr}
+\toprule
+model & encoder & params_M & GFLOPs & GMACs & input & cpu_latency_ms & cpu_fps & gpu_latency_ms & gpu_fps & gpu_vram_GB \\
+\midrule
+pspnet & resnet50 & 24.410 & 24.200 & 12.100 & 512x512 & 216.200 & 4.600 & 19.400 & 51.600 & 0.300 \\
+segformer & mit_b0 & 3.720 & 9.900 & 4.900 & 512x512 & 270.300 & 3.700 & 28.940 & 34.600 & 0.330 \\
+unet & resnet34 & 24.440 & 64.300 & 32.200 & 512x512 & 318.500 & 3.100 & 29.080 & 34.400 & 0.200 \\
+deeplabv3plus & resnet50 & 26.680 & 73.300 & 36.700 & 512x512 & 459.600 & 2.200 & 46.460 & 21.500 & 0.380 \\
+unetpp & resnet34 & 26.080 & 148.900 & 74.400 & 512x512 & 723.300 & 1.400 & 62.320 & 16.000 & 0.370 \\
+\bottomrule
+\end{tabular}
+\end{table}

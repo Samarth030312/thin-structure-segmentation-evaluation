@@ -1,0 +1,231 @@
+{
+  "_comment": "Auto-generated from RLMD classes.csv (veetinator/Road_Line_Marking_Dataset). RGB->id for the colour masks.",
+  "ignore_index": 255,
+  "classes": [
+    {
+      "id": 0,
+      "name": "background",
+      "color": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 1,
+      "name": "box_junction",
+      "color": [
+        255,
+        242,
+        0
+      ]
+    },
+    {
+      "id": 2,
+      "name": "crosswalk",
+      "color": [
+        34,
+        117,
+        76
+      ]
+    },
+    {
+      "id": 3,
+      "name": "stop_line",
+      "color": [
+        61,
+        72,
+        204
+      ]
+    },
+    {
+      "id": 4,
+      "name": "solid_single_white",
+      "color": [
+        237,
+        28,
+        36
+      ]
+    },
+    {
+      "id": 5,
+      "name": "solid_single_yellow",
+      "color": [
+        163,
+        73,
+        164
+      ]
+    },
+    {
+      "id": 6,
+      "name": "solid_single_red",
+      "color": [
+        185,
+        122,
+        87
+      ]
+    },
+    {
+      "id": 7,
+      "name": "solid_double_white",
+      "color": [
+        136,
+        0,
+        21
+      ]
+    },
+    {
+      "id": 8,
+      "name": "solid_double_yellow",
+      "color": [
+        112,
+        146,
+        190
+      ]
+    },
+    {
+      "id": 9,
+      "name": "dashed_single_white",
+      "color": [
+        181,
+        230,
+        29
+      ]
+    },
+    {
+      "id": 10,
+      "name": "dashed_single_yellow",
+      "color": [
+        153,
+        217,
+        234
+      ]
+    },
+    {
+      "id": 11,
+      "name": "left_arrow",
+      "color": [
+        158,
+        159,
+        76
+      ]
+    },
+    {
+      "id": 12,
+      "name": "straight_arrow",
+      "color": [
+        121,
+        138,
+        134
+      ]
+    },
+    {
+      "id": 13,
+      "name": "right_arrow",
+      "color": [
+        41,
+        64,
+        96
+      ]
+    },
+    {
+      "id": 14,
+      "name": "left_straight_arrow",
+      "color": [
+        7,
+        102,
+        146
+      ]
+    },
+    {
+      "id": 15,
+      "name": "right_straight_arrow",
+      "color": [
+        247,
+        153,
+        255
+      ]
+    },
+    {
+      "id": 16,
+      "name": "channelizing_line",
+      "color": [
+        255,
+        204,
+        153
+      ]
+    },
+    {
+      "id": 17,
+      "name": "motor_prohibited",
+      "color": [
+        155,
+        255,
+        153
+      ]
+    },
+    {
+      "id": 18,
+      "name": "slow",
+      "color": [
+        255,
+        153,
+        173
+      ]
+    },
+    {
+      "id": 19,
+      "name": "motor_priority_lane",
+      "color": [
+        230,
+        224,
+        147
+      ]
+    },
+    {
+      "id": 20,
+      "name": "motor_waiting_zone",
+      "color": [
+        35,
+        27,
+        87
+      ]
+    },
+    {
+      "id": 21,
+      "name": "left_turn_box",
+      "color": [
+        193,
+        158,
+        155
+      ]
+    },
+    {
+      "id": 22,
+      "name": "motor_icon",
+      "color": [
+        109,
+        29,
+        78
+      ]
+    },
+    {
+      "id": 23,
+      "name": "bike_icon",
+      "color": [
+        3,
+        164,
+        204
+      ]
+    },
+    {
+      "id": 24,
+      "name": "parking_lot",
+      "color": [
+        175,
+        157,
+        185
+      ]
+    }
+  ]
+}

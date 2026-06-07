@@ -1,0 +1,23 @@
+{
+  "num_classes": 7,
+  "size": 256,
+  "mean": [
+    0.485,
+    0.456,
+    0.406
+  ],
+  "std": [
+    0.229,
+    0.224,
+    0.225
+  ],
+  "class_names": [
+    "background",
+    "solid_lane_line",
+    "dashed_lane_line",
+    "zebra_crossing",
+    "road_arrow",
+    "stop_line",
+    "yellow_line"
+  ]
+}

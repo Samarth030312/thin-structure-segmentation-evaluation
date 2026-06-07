@@ -1,0 +1,17 @@
+# Clean 6-loss ablation: U-Net R34 fixed, loss=ce. Identical except loss.
+_base_:
+  - ../dataset/rlmd.yaml
+  - ../model/unet.yaml
+  - ../loss/ce.yaml
+  - ../train/gpu.yaml
+run_name: rlmd_unet_ce
+seed: 42
+model: {pretrained: true}
+dataset: {image_size: [384, 384], subsample: 400}
+train:
+  epochs: 10
+  batch_size: 8
+  amp: false
+  num_workers: 6
+  optimizer: {name: adamw, lr: 0.0004, weight_decay: 0.0001}
+notes: "RLMD clean 6-loss ablation: unet+ce (seed 42)"

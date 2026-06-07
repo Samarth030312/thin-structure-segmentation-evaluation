@@ -1,0 +1,14 @@
+# RLMD binarized: any road marking -> foreground (class 1). For cross-dataset.
+dataset:
+  name: rlmd_bin
+  root: datasets/rlmd
+  num_classes: 2
+  ignore_index: 255
+  foreground_only: true
+  image_size: [384, 384]
+  train_split: train
+  val_split: test
+  test_split: test
+  strict: true
+  class_map: {1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1, 7: 1, 8: 1, 9: 1, 10: 1, 11: 1, 12: 1, 13: 1, 14: 1, 15: 1, 16: 1, 17: 1, 18: 1, 19: 1, 20: 1, 21: 1, 22: 1, 23: 1, 24: 1}
+  class_names: [background, marking]

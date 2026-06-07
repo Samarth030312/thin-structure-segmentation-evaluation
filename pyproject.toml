@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "uavroadmark"
+version = "0.1.0"
+description = "An evaluation framework for Indian road-marking segmentation from UAV imagery."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "UAV RoadMark Benchmark Authors" }]
+keywords = ["semantic-segmentation", "uav", "road-marking", "autonomous-driving", "benchmark"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Scientific/Engineering :: Image Recognition",
+]
+dependencies = [
+    "numpy>=1.23",
+    "opencv-python-headless>=4.7",
+    "pillow>=9.4",
+    "matplotlib>=3.6",
+    "pandas>=1.5",
+    "pyyaml>=6.0",
+    "albumentations>=1.3",
+    "scikit-learn>=1.2",
+    "tqdm>=4.64",
+    "jinja2>=3.1",
+]
+
+[project.optional-dependencies]
+torch = ["torch>=2.0", "torchvision>=0.15", "segmentation-models-pytorch>=0.3.3"]
+tracking = ["tensorboard>=2.12", "wandb>=0.15"]
+dev = ["pytest>=7.2", "pytest-cov>=4.0", "ruff>=0.1"]
+
+[project.scripts]
+uavrm-validate = "uavroadmark.cli.validate:main"
+uavrm-train = "uavroadmark.cli.train:main"
+uavrm-eval = "uavroadmark.cli.evaluate:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"

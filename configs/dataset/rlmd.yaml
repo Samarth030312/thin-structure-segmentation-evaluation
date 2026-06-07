@@ -1,0 +1,41 @@
+# RLMD - Road Line & Marking Dataset (veetinator/Road_Line_Marking_Dataset).
+# Real, IEEE-published (doi 10226935): 2137 driving-scene images, 25 marking classes,
+# RGB colour masks. PRIMARY REAL dataset. Prepare via scripts/prepare_real.py.
+dataset:
+  name: rlmd
+  root: datasets/rlmd
+  num_classes: 25
+  ignore_index: 255
+  foreground_only: true
+  image_size: [512, 512]
+  train_split: train
+  val_split: val
+  test_split: test
+  strict: true
+  class_map: null
+  class_names:
+    - background
+    - box_junction
+    - crosswalk
+    - stop_line
+    - solid_single_white
+    - solid_single_yellow
+    - solid_single_red
+    - solid_double_white
+    - solid_double_yellow
+    - dashed_single_white
+    - dashed_single_yellow
+    - left_arrow
+    - straight_arrow
+    - right_arrow
+    - left_straight_arrow
+    - right_straight_arrow
+    - channelizing_line
+    - motor_prohibited
+    - slow
+    - motor_priority_lane
+    - motor_waiting_zone
+    - left_turn_box
+    - motor_icon
+    - bike_icon
+    - parking_lot

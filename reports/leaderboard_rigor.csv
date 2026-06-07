@@ -1,0 +1,2 @@
+run_name,model,loss,split,mIoU,mDice,mF1,mPrecision,mRecall,PixelAcc,FWIoU,clDice,BoundaryIoU,clF1,clRecall,TolIoU,params_M,notes
+rlmdbin_converge,unet,ce_dice,test,0.5338,0.6961,0.6961,0.7268,0.6678,0.9891,0.9804,0.6386,0.4581,0.767,0.6967,0.5927,24.44,cross-dataset binary foreground: rlmd_bin

@@ -1,0 +1,11 @@
+# Proposed Connectivity-Recall (CoRe) loss: CE + Dice (calibrated base) + soft clDice.
+# The CE term prevents the foreground over-prediction we measured with pure
+# recall-Tversky; the clDice term adds connectivity awareness for thin markings.
+loss:
+  name: core
+  w_ce: 0.5
+  w_region: 0.5
+  w_topo: 0.5
+  region: dice      # set to 'tversky' (+ alpha/beta) for a recall-biased variant
+  num_iter: 10
+  warmup: 150       # ramp the topology weight over the first 150 steps

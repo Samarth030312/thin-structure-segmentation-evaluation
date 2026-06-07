@@ -1,0 +1,12 @@
+# Loss ablation (thin-structure thesis): U-Net R34 on synthetic_lg, GPU.
+# Holds architecture/data/schedule fixed; varies ONLY the loss.
+_base_:
+  - ../dataset/synthetic_lg.yaml
+  - ../model/unet.yaml
+  - ../loss/ce_dice.yaml
+  - ../train/gpu.yaml
+run_name: abl_unet_ce_dice
+seed: 42
+model:
+  pretrained: false
+notes: "loss ablation: ce_dice"

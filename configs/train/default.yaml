@@ -1,0 +1,23 @@
+# Default training schedule for full GPU runs.
+train:
+  device: auto             # auto -> cuda if available else cpu
+  epochs: 60
+  batch_size: 8
+  val_batch_size: 8
+  num_workers: 4
+  pin_memory: true
+  amp: true                # mixed precision (auto-disabled on CPU)
+  grad_accum: 1
+  grad_clip: 1.0
+  monitor: miou            # checkpoint + early-stop on validation mIoU (fg)
+  patience: 12
+  out_dir: outputs
+  leaderboard: reports/leaderboard.csv
+  tensorboard: true
+  wandb: false
+  optimizer:
+    name: adamw
+    lr: 0.0003
+    weight_decay: 0.0001
+  scheduler:
+    name: cosine

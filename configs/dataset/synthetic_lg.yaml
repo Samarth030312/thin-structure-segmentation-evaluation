@@ -1,0 +1,13 @@
+# Larger synthetic dataset (200/40/40) for the research experiments.
+dataset:
+  name: synthetic_lg
+  root: datasets/synthetic_lg
+  num_classes: 7
+  ignore_index: null
+  foreground_only: true
+  image_size: [256, 256]
+  train_split: train
+  val_split: val
+  test_split: test
+  strict: true
+  class_names: [background, solid_lane_line, dashed_lane_line, zebra_crossing, road_arrow, stop_line, yellow_line]

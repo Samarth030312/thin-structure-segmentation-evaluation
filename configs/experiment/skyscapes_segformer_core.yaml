@@ -1,0 +1,17 @@
+# Real SkyScapes-Lane benchmark: segformer + core. Prepare data first (docs/skyscapes.md).
+_base_:
+  - ../dataset/skyscapes.yaml
+  - ../model/segformer.yaml
+  - ../loss/core.yaml
+  - ../train/gpu.yaml
+run_name: skyscapes_segformer_core
+seed: 42
+model:
+  pretrained: true        # ImageNet encoder helps on real imagery (needs net on first run)
+train:
+  epochs: 50
+  batch_size: 4           # 13 classes @ 512^2 -> smaller batch for the 4 GB card
+  val_batch_size: 4
+  amp: true               # pretrained encoders are fp16-stable, unlike from-scratch
+  grad_accum: 2           # effective batch 8
+notes: "SkyScapes-Lane segformer+core (real aerial markings)"

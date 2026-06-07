@@ -1,0 +1,4 @@
+model:
+  name: segformer
+  encoder: mit_b0
+  pretrained: true

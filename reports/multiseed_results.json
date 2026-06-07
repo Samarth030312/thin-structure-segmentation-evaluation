@@ -1,0 +1,77 @@
+{
+  "ce_dice": {
+    "n_seeds": 3,
+    "seeds": [
+      42,
+      123,
+      999
+    ],
+    "mIoU": {
+      "mean": 0.0506,
+      "std": 0.024,
+      "ci95_halfwidth": 0.0272
+    },
+    "PixelAcc": {
+      "mean": 0.9831,
+      "std": 0.0011,
+      "ci95_halfwidth": 0.0013
+    },
+    "clDice": {
+      "mean": 0.4045,
+      "std": 0.0576,
+      "ci95_halfwidth": 0.0652
+    },
+    "clRecall": {
+      "mean": 0.3871,
+      "std": 0.0505,
+      "ci95_halfwidth": 0.0572
+    },
+    "TolIoU": {
+      "mean": 0.3476,
+      "std": 0.0515,
+      "ci95_halfwidth": 0.0583
+    }
+  },
+  "core": {
+    "n_seeds": 3,
+    "seeds": [
+      42,
+      123,
+      999
+    ],
+    "mIoU": {
+      "mean": 0.0072,
+      "std": 0.0024,
+      "ci95_halfwidth": 0.0027
+    },
+    "PixelAcc": {
+      "mean": 0.9784,
+      "std": 0.0023,
+      "ci95_halfwidth": 0.0026
+    },
+    "clDice": {
+      "mean": 0.4056,
+      "std": 0.1413,
+      "ci95_halfwidth": 0.1599
+    },
+    "clRecall": {
+      "mean": 0.3625,
+      "std": 0.1575,
+      "ci95_halfwidth": 0.1782
+    },
+    "TolIoU": {
+      "mean": 0.3249,
+      "std": 0.1124,
+      "ci95_halfwidth": 0.1272
+    }
+  },
+  "_paired_ce_dice_minus_core_clDice": {
+    "mean_diff": -0.0011,
+    "ci95": [
+      -0.1823,
+      0.1802
+    ],
+    "n_pairs": 3,
+    "ce_dice_better_all_seeds": false
+  }
+}

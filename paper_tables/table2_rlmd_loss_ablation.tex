@@ -1,0 +1,15 @@
+\begin{table}
+\caption{RLMD clean 6-loss ablation (U-Net++)}
+\begin{tabular}{lrrrrr}
+\toprule
+loss & mIoU & PixelAcc & clDice & clRecall & TolIoU \\
+\midrule
+ce & 0.009 & 0.982 & 0.062 & 0.096 & 0.084 \\
+dice & 0.140 & 0.008 & 0.062 & 1.000 & 0.044 \\
+ce_dice & 0.029 & 0.983 & 0.373 & 0.356 & 0.324 \\
+focal & 0.018 & 0.983 & 0.085 & 0.103 & 0.092 \\
+tversky & 0.144 & 0.009 & 0.084 & 1.000 & 0.044 \\
+core & 0.005 & 0.981 & 0.275 & 0.211 & 0.215 \\
+\bottomrule
+\end{tabular}
+\end{table}

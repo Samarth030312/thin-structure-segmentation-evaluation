@@ -1,0 +1,42 @@
+{
+  "root": "datasets/uavid",
+  "num_classes": 2,
+  "passed": true,
+  "total_errors": 0,
+  "total_warnings": 1,
+  "splits": [
+    {
+      "split": "train",
+      "n_images": 101,
+      "n_masks": 101,
+      "n_paired": 101,
+      "n_errors": 0,
+      "n_warnings": 1,
+      "class_pixel_counts": {
+        "0": 52820150,
+        "1": 6752074
+      },
+      "issues": [
+        {
+          "severity": "warning",
+          "check": "empty_mask",
+          "sample": "train-00001-of-00006_0031",
+          "detail": "mask contains only background"
+        }
+      ]
+    },
+    {
+      "split": "test",
+      "n_images": 24,
+      "n_masks": 24,
+      "n_paired": 24,
+      "n_errors": 0,
+      "n_warnings": 0,
+      "class_pixel_counts": {
+        "0": 12751573,
+        "1": 1404203
+      },
+      "issues": []
+    }
+  ]
+}

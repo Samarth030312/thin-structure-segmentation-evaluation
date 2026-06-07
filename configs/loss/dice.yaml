@@ -1,0 +1,3 @@
+loss:
+  name: dice
+  foreground_only: true

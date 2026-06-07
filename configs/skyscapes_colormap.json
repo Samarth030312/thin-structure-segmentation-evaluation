@@ -1,0 +1,19 @@
+{
+  "_comment": "RGB->class-id map for SkyScapes-Lane COLOR masks. The colors below are a TEMPLATE with distinct placeholder values. BEFORE using rgb-mode, run `python scripts/prepare_skyscapes.py inspect --label-dir <raw labels>` to print the ACTUAL unique colors in your download, then replace the 'color' values here (or use SkyScapes' shipped class-dictionary CSV). If your download provides single-channel grayscale id masks instead, use id-mode and ignore this file.",
+  "ignore_index": 255,
+  "classes": [
+    {"id": 0,  "name": "background",          "color": [0, 0, 0]},
+    {"id": 1,  "name": "dash_line",           "color": [255, 0, 0]},
+    {"id": 2,  "name": "long_line",           "color": [0, 255, 0]},
+    {"id": 3,  "name": "small_dash_line",     "color": [0, 0, 255]},
+    {"id": 4,  "name": "turn_sign",           "color": [255, 255, 0]},
+    {"id": 5,  "name": "plus_sign",           "color": [255, 0, 255]},
+    {"id": 6,  "name": "other_signs",         "color": [0, 255, 255]},
+    {"id": 7,  "name": "crosswalk",           "color": [128, 0, 0]},
+    {"id": 8,  "name": "stop_line",           "color": [0, 128, 0]},
+    {"id": 9,  "name": "zebra_zone",          "color": [0, 0, 128]},
+    {"id": 10, "name": "no_parking_zone",     "color": [128, 128, 0]},
+    {"id": 11, "name": "parking_zone",        "color": [128, 0, 128]},
+    {"id": 12, "name": "other_lane_markings", "color": [0, 128, 128]}
+  ]
+}

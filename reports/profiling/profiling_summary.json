@@ -1,0 +1,13 @@
+{
+  "device": "cuda",
+  "image_size": [
+    384,
+    384
+  ],
+  "batch_size": 4,
+  "dataloader_imgs_per_s": {
+    "workers_0": 61.6,
+    "workers_2": 67.4,
+    "workers_6": 71.7
+  }
+}

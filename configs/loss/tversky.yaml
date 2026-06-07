@@ -1,0 +1,5 @@
+loss:
+  name: tversky
+  alpha: 0.3   # FP weight
+  beta: 0.7    # FN weight (>alpha -> favour recall on thin markings)
+  foreground_only: true

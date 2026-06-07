@@ -1,0 +1,26 @@
+{
+  "label": "MassRoads",
+  "n_images": 40,
+  "measured_mean_width_px": 4.31,
+  "measured_median_width_px": 4.309,
+  "measured_mean_mIoU": 0.509,
+  "measured_mean_clDice": 0.763,
+  "measured_mean_gap": 0.254,
+  "bins": {
+    "<6": {
+      "n": 40,
+      "mIoU": 0.509,
+      "clDice": 0.763,
+      "tol_recall": 0.75
+    }
+  },
+  "corr_width_iou": 0.058,
+  "corr_width_cldice": 0.008,
+  "thin_tertile": {
+    "n": 13,
+    "mean_IoU": 0.488,
+    "mean_clDice": 0.752,
+    "mean_recall": 0.742,
+    "clDice_minus_IoU": 0.264
+  }
+}
