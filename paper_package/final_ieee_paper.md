@@ -201,5 +201,7 @@ key next steps.
 [10] S. Salehi et al., "Tversky loss," MLMI, 2017.
 [11] R. Selvaraju et al., "Grad-CAM," ICCV, 2017.
 [12] "RLMD: A Dataset for Road Marking Segmentation," IEEE, doi:10.1109/...10226935.
-[13] J. Wang et al., "LoveDA," NeurIPS D&B, 2021.
-[14] S. Azimi et al., "SkyScapes," ICCV, 2019.
+[13] J. Wang et al., "LoveDA: A Remote Sensing Land-Cover Dataset for Domain Adaptive Semantic Segmentation," NeurIPS D&B, 2021.
+[14] Y. Lyu et al., "UAVid: A Semantic Segmentation Dataset for UAV Imagery," ISPRS J. Photogrammetry and Remote Sensing, 2020.
+[15] V. Mnih, "Machine Learning for Aerial Image Labeling" (Massachusetts Roads Dataset), PhD thesis, Univ. of Toronto, 2013.
+[16] S. Azimi et al., "SkyScapes," ICCV, 2019.

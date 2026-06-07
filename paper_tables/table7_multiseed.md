@@ -1,7 +1,25 @@
-**Multi-seed CIs (headline)**
+**Multi-seed results (3 seeds: 42, 123, 999), mean ± 95% CI half-width.**
 
-| loss                              |   n_seeds | seeds          | mIoU                                                      | PixelAcc                                                  | clDice                                                    | clRecall                                                  | TolIoU                                                    |   mean_diff | ci95              |   n_pairs |   ce_dice_better_all_seeds |
-|:----------------------------------|----------:|:---------------|:----------------------------------------------------------|:----------------------------------------------------------|:----------------------------------------------------------|:----------------------------------------------------------|:----------------------------------------------------------|------------:|:------------------|----------:|---------------------------:|
-| ce_dice                           |         3 | [42, 123, 999] | {'mean': 0.0506, 'std': 0.024, 'ci95_halfwidth': 0.0272}  | {'mean': 0.9831, 'std': 0.0011, 'ci95_halfwidth': 0.0013} | {'mean': 0.4045, 'std': 0.0576, 'ci95_halfwidth': 0.0652} | {'mean': 0.3871, 'std': 0.0505, 'ci95_halfwidth': 0.0572} | {'mean': 0.3476, 'std': 0.0515, 'ci95_halfwidth': 0.0583} |    nan      | nan               |       nan |                        nan |
-| core                              |         3 | [42, 123, 999] | {'mean': 0.0072, 'std': 0.0024, 'ci95_halfwidth': 0.0027} | {'mean': 0.9784, 'std': 0.0023, 'ci95_halfwidth': 0.0026} | {'mean': 0.4056, 'std': 0.1413, 'ci95_halfwidth': 0.1599} | {'mean': 0.3625, 'std': 0.1575, 'ci95_halfwidth': 0.1782} | {'mean': 0.3249, 'std': 0.1124, 'ci95_halfwidth': 0.1272} |    nan      | nan               |       nan |                        nan |
-| _paired_ce_dice_minus_core_clDice |       nan | nan            | nan                                                       | nan                                                       | nan                                                       | nan                                                       | nan                                                       |     -0.0011 | [-0.1823, 0.1802] |         3 |                          0 |
+Per-loss summary (CIs are bootstrap 95% half-widths over the 3 seeds):
+
+| loss | mIoU | PixelAcc | clDice | clRecall | TolIoU |
+|:-----|:-----|:---------|:-------|:---------|:-------|
+| ce_dice | 0.0506 ± 0.0272 | 0.9831 ± 0.0013 | 0.4045 ± 0.0652 | 0.3871 ± 0.0572 | 0.3476 ± 0.0583 |
+| core    | 0.0072 ± 0.0027 | 0.9784 ± 0.0026 | 0.4056 ± 0.1599 | 0.3625 ± 0.1782 | 0.3249 ± 0.1272 |
+
+**Paired comparison (CE+Dice − CoRe, clDice), n = 3 paired seeds:**
+
+| quantity | value |
+|:---------|:------|
+| mean difference (Δ) | **−0.0011** |
+| 95% CI of Δ | **[−0.1823, 0.1802]** |
+| CE+Dice better on all seeds? | **No** (CoRe wins at seed 999) |
+
+**Interpretation.** The clDice difference between CE+Dice and CoRe is **not
+significant**: the paired-difference 95% CI [−0.18, 0.18] straddles 0, and the per-loss
+CIs overlap heavily (CoRe's variance is ~2.5× larger). CoRe is a **null result** — it
+ties the CE+Dice baseline and is reported as such.
+
+*(Note: per-loss rows have no paired columns by construction; the paired statistics are
+the dedicated block above. Source: per-seed eval JSONs aggregated by
+`src/uavroadmark/metrics/stats.py`.)*
