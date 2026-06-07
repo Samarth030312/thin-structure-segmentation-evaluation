@@ -1,38 +1,31 @@
-# Python
-__pycache__/
-*.py[cod]
-*.egg-info/
-.eggs/
-build/
-dist/
-.venv/
-venv/
-.ipynb_checkpoints/
+# datasets
+datasets/
 
-# Tooling
-.pytest_cache/
-.ruff_cache/
-.coverage
-htmlcov/
-
-# Data & artifacts (never commit large binaries)
-datasets/*/
-!datasets/.gitkeep
+# outputs
 outputs/
-runs/
-wandb/
+
+# model artifacts
 *.pth
+*.pt
 *.ckpt
 *.onnx
-*.ts.pt
-deploy/models/*.ts.pt
-deploy/models/*.onnx
+*.engine
 
-# Reports that are regenerated (keep the .md, drop heavy renders)
-reports/exploratory_analysis/*.png
-reports/exploratory_analysis/*.json
-validation_report.html
-validation_report.json
+# logs
+*.log
 
-# OS
+# python cache
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# notebooks
+.ipynb_checkpoints/
+
+# environments
+.env
+.venv
+venv/
+
+# operating system
 .DS_Store

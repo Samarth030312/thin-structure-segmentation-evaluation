@@ -1,153 +1,107 @@
+
 # When mIoU Lies — Thin-Structure Segmentation Evaluation
 
-**A reproducible study and framework showing — and explaining with a geometric
-law — when and why mean-IoU is a misleading metric for thin road markings and
-lane lines.**
+**An evaluation study of when and why mean-IoU misleads for thin road markings and
+lane lines — with a geometric explanation and a reproducible benchmark.**
 
-[![tests](https://img.shields.io/badge/tests-62%20passing-brightgreen)]()
-[![python](https://img.shields.io/badge/python-3.9%2B-blue)]()
-[![license](https://img.shields.io/badge/license-MIT-green)]()
+![tests](https://img.shields.io/badge/tests-62%20passing-brightgreen)
+![python](https://img.shields.io/badge/python-3.9%2B-blue)
+![license](https://img.shields.io/badge/license-MIT-green)
 
----
-
-## TL;DR
-
-Mean Intersection-over-Union (mIoU) is the default metric for road-marking
-segmentation. We show it **systematically under-reports thin structures that a
-model has in fact correctly detected**, and we derive the exact functional form
-of that error:
-
-> **Gap(w) = clDice − mIoU ≈ 2δ / (w + 2δ)**
->
-> where `w` is the structure width in pixels and `δ` is the model's per-side
-> boundary-localisation error (≈ 1 px).
-
-The law is **derived from pixel geometry** (Part 7 of the monograph),
-**confirmed in a controlled, model-free experiment** (inverse-width fit,
-R² = 0.98; linear/exponential/log rejected), **validated on three real datasets**
-(Massachusetts Roads, LoveDA, UAVid — they fall on the curve), and yields
-**actionable thresholds**: mIoU is misleading below ~5 px (markings), reliable
-above ~25 px (wide roads).
-
-The repository also contains the supporting evaluation framework: a config-driven
-training/evaluation pipeline, a thin-structure metric suite (clDice, Boundary-IoU,
-tolerance-IoU, width-stratified IoU), dataset ingestion, and 62 passing tests.
-
-**This is an *evaluation* study. We claim no new state-of-the-art model, and we
-report a proposed loss (CoRe) that did *not* work as an honest null result.**
+> **This is a measurement/evaluation study — not a new segmentation model.** No
+> state-of-the-art accuracy is claimed.
 
 ---
 
-## Start here
+## The result in one box
 
-| Audience | Read this |
-|---|---|
-| 2-minute overview | this README + `paper_figures/figA_width_gap_law.pdf` |
-| The paper | [`paper_package/final_ieee_paper.pdf`](paper_package/final_ieee_paper.pdf) — *"When mIoU Lies"* |
-| The full textbook (58 pp) | [`docs/UAV_Roadmark_Master_Monograph.pdf`](docs/UAV_Roadmark_Master_Monograph.pdf) |
-| The law + derivation | [`reports/width_coupling_theory.md`](reports/width_coupling_theory.md), [`reports/first_principles_width_analysis.md`](reports/first_principles_width_analysis.md) |
-| Failure thresholds | [`reports/failure_thresholds.md`](reports/failure_thresholds.md) |
-| Is it a law or an artifact? | [`reports/law_assessment.md`](reports/law_assessment.md) |
-| Honest limits & integrity | [`reports/repository_integrity_report.md`](reports/repository_integrity_report.md), [`FINAL_RESEARCH_VERDICT.md`](FINAL_RESEARCH_VERDICT.md) |
+mIoU systematically **under-reports thin structures that a model has correctly
+detected**. The disagreement between mIoU and a centerline metric (clDice) follows a
+simple geometric relationship with structure width `w`:
 
----
+```
+Gap(w) = clDice − mIoU ≈ 2δ / (w + 2δ)      (δ ≈ boundary-localisation error, ~1 px)
+```
 
-## Reproduce the central result (CPU, minutes, no download)
+Thin markings (2–8 px) live where mIoU is most misleading; wide structures do not.
+**Takeaway: for thin structures, report clDice / tolerance-IoU alongside mIoU.**
+
+## Why it matters
+
+Perception teams select and gate models on metrics. If mIoU under-credits
+thin-structure detectors, model selection is biased against the safety-relevant thin
+things (lane lines, markings). This repo quantifies that bias and gives a width-based
+rule for when mIoU can be trusted.
+
+## Evidence at a glance (all numbers traceable)
+
+**Controlled experiment** — synthetic structures, width 1→30 px, fixed 1-px boundary
+error (`scripts/run_controlled_robustness.py`). Fitting candidate forms
+(`scripts/fit_width_law.py`): the inverse-width family fits (power R²=0.989, rational
+0.986, inverse 0.977); linear (0.626), exponential (0.892), logarithmic (0.937) are
+rejected. Fitted δ ≈ 0.67 px.
+
+**Measured on real datasets** (`scripts/run_width_validation.py`):
+
+| Dataset | Type | Mean width | mIoU | clDice | Gap |
+|---|---|---|---|---|---|
+| Synthetic | controlled markings | 2 px | 0.351 | 0.997 | **0.65** |
+| Massachusetts Roads | real aerial thin roads | 4.31 px | 0.509 | 0.763 | **0.25** |
+| LoveDA | real aerial thin roads | 4.90 px | 0.478 | 0.698 | **0.22** |
+| UAVid | real UAV wide roads | 16.24 px | 0.528 | 0.543 | **0.02** |
+
+Thin → large gap; wide (UAVid) → ≈ 0, exactly as the relationship predicts. Key
+figure: `paper_figures/figA_width_gap_law.png`.
+
+**Reliability rule:** below ~5 px, mIoU under-reports a detected structure by >20 %;
+above ~25 px the disagreement is <5 % (`reports/failure_thresholds.md`). Thresholds
+scale with δ.
+
+## Reproduce in minutes (CPU, no download)
 
 ```bash
-pip install -e .                              # or: pip install -r requirements.txt
-PYTHONPATH=src python scripts/run_controlled_robustness.py   # geometry-only width sweep
-PYTHONPATH=src python scripts/fit_width_law.py               # fit candidate forms (R^2/AIC)
-PYTHONPATH=src python scripts/make_law_figures.py            # Figures A-D (300 DPI + PDF)
+pip install -e .
+python scripts/run_controlled_robustness.py   # geometry-only width sweep
+python scripts/fit_width_law.py               # fit candidate forms
+python scripts/make_law_figures.py            # figures
+python -m pytest                              # 62 tests
 ```
 
-This reproduces the law from pure geometry — **no model, no dataset, no GPU** —
-and writes `reports/controlled/*.json` and `paper_figures/figA-D`.
-
-### Real-data validation (optional, needs the public datasets + a GPU)
-
-```bash
-# Ingest a real dataset (example: UAVid, genuine low-altitude UAV imagery)
-PYTHONPATH=src python scripts/prepare_uavid.py --raw <parquet> --out datasets/uavid
-# Train a converged binary-road model, then place it on the law curve
-bash scripts/run_uav_benchmark.sh
-PYTHONPATH=src python scripts/run_width_validation.py \
-    --config configs/experiment/uav_uavid.yaml \
-    --checkpoints outputs/uav_uavid_s42/best.pth ... --label UAVid
-```
-
-Datasets are **not** redistributed; ingestion scripts pull them from their public
-sources (see **Data & licences** below).
-
----
-
-## What's in the box
+## What's included
 
 ```
-src/uavroadmark/      installable package (data, models, losses, metrics, engine, cli)
-  metrics/            mIoU + thin-structure suite: clDice, Boundary-IoU, TolIoU, width-IoU
-  losses/             CE, Dice, Focal, Tversky, soft-clDice, CoRe (null result)
-  models/             U-Net, U-Net++, DeepLabV3+, PSPNet, SegFormer (smp-backed)
-scripts/              the science: controlled study, law fit, figures, real-data validation
-configs/              YAML composition (_base_ + CLI overrides); custom_dataset.yaml template
-paper_package/        final_ieee_paper.{md,tex,pdf}  ("When mIoU Lies")
-docs/                 UAV_Roadmark_Master_Monograph.{md,pdf}  (58-page textbook) + guides
-reports/              the law theory, validation, robustness, attacks, audits
-tests/                62 tests (metrics, losses, models, data, validator, config, e2e)
+src/uavroadmark/   package: metrics (clDice, Boundary-IoU, TolIoU, width-IoU),
+                   losses, models (U-Net, U-Net++, DeepLabV3+, PSPNet, SegFormer),
+                   data, engine, cli
+scripts/           controlled study, law fit, figures, real-data validation, ingestion
+configs/           YAML composition; custom_dataset.yaml template
+paper_package/     final_ieee_paper.{md,tex,pdf}
+paper_figures/  paper_tables/  reports/   results, analysis, validation
+tests/             62 tests       deploy/  ONNX/TorchScript export
 ```
 
-## Datasets used (all real, all public)
+## What is NOT claimed
 
-| Dataset | Role | Structure | Note |
-|---|---|---|---|
-| Synthetic (in-repo generator) | derive & control the law | markings 2–8 px | width is an independent variable |
-| RLMD | real ground-view markings | 2–8 px | imbalance study + converged binary model |
-| LoveDA | real aerial roads | <6 px | law confirmed (gap +0.22) |
-| Massachusetts Roads | real aerial thin roads | 3–6 px | law confirmed (gap +0.27, 3 seeds) |
-| UAVid | real low-altitude UAV roads | 12–35 px | wide → law correctly predicts ~0 gap |
+- **No aerial road-*marking* result** — the ideal dataset (SkyScapes) is licence-gated
+  and was not obtained; validation uses real thin *roads* + synthetic markings
+  (`reports/skyscapes_acquisition_attempt.md`).
+- The relationship is, at core, IoU's definition made explicit — an evaluation
+  contribution, not a new method (`reports/law_assessment.md`).
+- δ is model-dependent; the 5 px / 25 px thresholds are illustrative, not universal.
+- A proposed connectivity loss (CoRe) did **not** beat the baseline — reported as a
+  null result (`paper_tables/table7_multiseed.md`).
 
-> **Honest scope.** There is **no aerial road-*marking* result** here: the ideal
-> dataset (SkyScapes) is licence-gated and was unreachable
-> (`reports/skyscapes_acquisition_attempt.md`). The law is validated on synthetic
-> markings and real thin *roads*; aerial-marking confirmation is future work.
+## Datasets & licenses
 
-## Key findings (all in `reports/`)
+Code is **MIT**. Datasets keep their own terms — LoveDA (CC-BY-NC), UAVid
+(research-only), Massachusetts Roads, RLMD. This repo **redistributes no data or
+checkpoints**; ingestion scripts fetch from public sources. See `DATA_LICENSES.md`.
 
-- **The width-coupling law** — derived, fit R²=0.98, real-data confirmed, survives
-  10 adversarial attacks (`reviewer_attack_campaign.md`).
-- **Failure thresholds** — FAILURE < 5 px, WARNING 5–25 px, SAFE > 25 px.
-- **mIoU mis-ranks losses under extreme class imbalance** (`metric_sensitivity_analysis.md`).
-- **Negative result:** the proposed CoRe loss ties the CE+Dice baseline across seeds.
-- **Negative result:** on wide UAVid roads the effect is absent — and that confirms
-  the law's safe-zone prediction.
+## Paper & citation
 
-## Limitations (read these)
-
-- The law is, at core, IoU's definition made explicit; novelty is moderate
-  (`reports/law_assessment.md`, `FINAL_RESEARCH_VERDICT.md`).
-- `δ` is model-dependent; the *form* is universal, the *scale* is not.
-- Real models on the 25-class task are compute-bounded (4 GB GPU); the law itself
-  rests on controlled geometry and converged binary models, so it is unaffected.
-
-## Data & licences
-
-Code is **MIT** (`LICENSE`). The datasets retain their own licences — several are
-**non-commercial / research-only** (LoveDA CC-BY-NC; UAVid research use;
-Massachusetts Roads; RLMD). See [`DATA_LICENSES.md`](DATA_LICENSES.md). Respect each
-dataset's terms; this repository redistributes none of them.
-
-## Tests
-
-```bash
-PYTHONPATH=src python -m pytest      # 62 tests
-```
-
-## Citation
-
-If you use this work, cite the paper (`paper_package/final_ieee_paper.pdf`,
-*"When mIoU Lies: A Geometric Width-Coupling Law for Thin-Structure Segmentation
-Metrics"*).
+`paper_package/final_ieee_paper.pdf` — *"When mIoU Lies: Topology-Aware Evaluation of
+Thin Road-Marking Segmentation."*
 
 ## License
 
-MIT — see [`LICENSE`](LICENSE). Datasets: see [`DATA_LICENSES.md`](DATA_LICENSES.md).
+MIT (`LICENSE`). Datasets: `DATA_LICENSES.md`.
